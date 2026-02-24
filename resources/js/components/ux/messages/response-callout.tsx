@@ -5,20 +5,20 @@ import { IconRenderer } from '@/components/ux/typography/icon-renderer';
 import { EmphasisDecoration } from '@/decorations/ui/emphasis-decoration';
 import { useDecorator } from '@/hooks/use-decorator';
 
-function ResponseAlert({ ...props }: ComponentProps<'div'>) {
-    const { alert } = usePage().flash;
-    const decorator = useDecorator(EmphasisDecoration, alert?.variant);
+function ResponseCallout({ ...props }: ComponentProps<'div'>) {
+    const { callout } = usePage().flash;
+    const decorator = useDecorator(EmphasisDecoration, callout?.variant);
 
-    if (!alert || !decorator) return null;
+    if (!callout || !decorator) return null;
 
     const { icon } = decorator;
 
     return (
-        <Alert variant={alert.variant} {...props}>
+        <Alert variant={callout.variant} {...props}>
             <IconRenderer iconNode={icon} />
-            <AlertDescription>{alert.message}</AlertDescription>
+            <AlertDescription>{callout.message}</AlertDescription>
         </Alert>
     );
 }
 
-export { ResponseAlert };
+export { ResponseCallout };

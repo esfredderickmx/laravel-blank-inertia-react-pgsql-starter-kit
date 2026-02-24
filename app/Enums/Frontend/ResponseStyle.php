@@ -4,6 +4,6 @@ namespace App\Enums\Frontend;
 
 enum ResponseStyle: string
 {
-    case ALERT = 'alert';
-    case TOAST = 'toast';
+    case CALLOUT = 'callout';
+    case TRANSIENT = 'transient';
 }

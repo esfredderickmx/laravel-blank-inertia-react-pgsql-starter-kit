@@ -5,26 +5,26 @@ import { toast } from 'sonner';
 import { EmphasisDecoration } from '@/decorations/ui/emphasis-decoration';
 import EmphasisVariant from '@/wayfinder/App/Enums/Frontend/EmphasisVariant';
 
-export function useToastListener() {
-    const { toast: toastResponse } = usePage().flash;
+export function useTransientListener() {
+    const { transient } = usePage().flash;
 
     useEffect(() => {
-        if (toastResponse) {
-            switch (toastResponse.variant) {
+        if (transient) {
+            switch (transient.variant) {
                 case 'affirmative':
-                    toast.success(toastResponse.message);
+                    toast.success(transient.message);
                     break;
                 case 'informative':
-                    toast.info(toastResponse.message);
+                    toast.info(transient.message);
                     break;
                 case 'preventive':
-                    toast.warning(toastResponse.message);
+                    toast.warning(transient.message);
                     break;
                 case 'destructive':
-                    toast.error(toastResponse.message);
+                    toast.error(transient.message);
                     break;
                 case 'neutral':
-                    toast(toastResponse.message, {
+                    toast(transient.message, {
                         icon: createElement(EmphasisDecoration[EmphasisVariant.NEUTRAL].icon, { className: 'size-4' }),
                         style: {
                             '--normal-bg': 'var(--neutral-foreground)',
@@ -34,7 +34,7 @@ export function useToastListener() {
                     });
                     break;
                 case 'interrogative':
-                    toast(toastResponse.message, {
+                    toast(transient.message, {
                         icon: createElement(EmphasisDecoration[EmphasisVariant.INTERROGATIVE].icon, { className: 'size-4' }),
                         style: {
                             '--normal-bg': 'var(--interrogative-foreground)',
@@ -44,9 +44,9 @@ export function useToastListener() {
                     });
                     break;
                 default:
-                    toast(toastResponse.message);
+                    toast(transient.message);
                     break;
             }
         }
-    }, [toastResponse]);
+    }, [transient]);
 }
