@@ -11,6 +11,7 @@ declare module '@inertiajs/core' {
         };
         flashDataType: {
             toast?: Response;
+            alert?: Response;
         };
     }
 }
