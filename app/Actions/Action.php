@@ -2,4 +2,9 @@
 
 namespace App\Actions;
 
-abstract class Action {}
+use Illuminate\Database\Eloquent\Model;
+
+abstract class Action
+{
+    abstract public function handle(): Model|string|bool|null;
+}
