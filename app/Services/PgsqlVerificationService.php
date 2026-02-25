@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use PDO;
 use Throwable;
-
 use function config;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
@@ -38,7 +37,10 @@ class PgsqlVerificationService
 
             $connection->getPdo();
         } catch (Throwable $exception) {
-            if (Str::contains($exception->getMessage(), 'does not exist')) {
+            $isDatabaseMissing = Str::contains($exception->getMessage(), ['does not exist', 'no existe'])
+                || ($exception instanceof \PDOException && $exception->getCode() === '3D000');
+
+            if ($isDatabaseMissing) {
                 PgsqlVerificationService::createDatabaseViaMaintenanceConnection();
             } else {
                 throw $exception;
