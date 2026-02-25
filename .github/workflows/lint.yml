@@ -38,6 +38,14 @@ jobs:
           composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           pnpm install
 
+      - name: Generate Wayfinder Types
+        run: |
+          cp .env.example .env
+          mkdir -p storage/framework/{cache/data,views,sessions,testing}
+          chmod -R 775 storage
+          php artisan key:generate
+          pnpm run build
+
       - name: Run Quality Checks
         run: composer run quality
 
