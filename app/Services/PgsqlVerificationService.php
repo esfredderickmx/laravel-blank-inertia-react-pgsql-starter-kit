@@ -11,6 +11,10 @@ use Throwable;
 use function config;
 use function Laravel\Prompts\error;
 use function Laravel\Prompts\info;
+use function Laravel\Prompts\intro;
+use function Laravel\Prompts\note;
+use function Laravel\Prompts\outro;
+use function Laravel\Prompts\warning;
 
 class PgsqlVerificationService
 {
@@ -28,10 +32,14 @@ class PgsqlVerificationService
      */
     public static function ensureDatabaseAndSchemaExist(): void
     {
+        intro('PostgreSQL Verification');
+
         try {
             $connection = DB::connection();
 
             if ($connection->getDriverName() !== 'pgsql') {
+                outro('Non-PostgreSQL driver detected, skipping verification.');
+
                 return;
             }
 
@@ -48,6 +56,8 @@ class PgsqlVerificationService
         }
 
         PgsqlVerificationService::ensureMigrationSchema();
+
+        outro('PostgreSQL is ready.');
     }
 
     private static function createDatabaseViaMaintenanceConnection(): void
@@ -56,6 +66,8 @@ class PgsqlVerificationService
         $db_name = $config['database'];
 
         $dsn = "pgsql:host={$config['host']};port={$config['port']};dbname=postgres";
+
+        note("Attempting to create database «{$db_name}» via maintenance connection…");
 
         try {
             $pdo = new PDO($dsn, $config['username'], $config['password']);
@@ -67,10 +79,12 @@ class PgsqlVerificationService
             if (! $stmt->fetch()) {
                 $pdo->exec("CREATE DATABASE \"$db_name\"");
 
-                info("Database '$db_name' created successfully.");
+                info("Database «{$db_name}» created successfully.");
+            } else {
+                warning("Database «{$db_name}» already exists, skipping creation.");
             }
         } catch (Throwable $exception) {
-            error("Could not auto-create database: {$exception->getMessage()}");
+            error("Could not auto-create database «{$db_name}»: {$exception->getMessage()}");
         }
     }
 
@@ -82,6 +96,8 @@ class PgsqlVerificationService
             $schema = Str::before($migration_table, '.');
 
             DB::statement("CREATE SCHEMA IF NOT EXISTS $schema");
+
+            info("Schema «{$schema}» is ready.");
         }
     }
 }
