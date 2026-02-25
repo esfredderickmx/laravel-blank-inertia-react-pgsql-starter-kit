@@ -52,12 +52,6 @@ jobs:
           coverage: xdebug
           extensions: pdo_pgsql, pgsql
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'pnpm'
-
       - name: Install Node Dependencies
         run: pnpm install
 
