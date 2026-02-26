@@ -1,15 +1,15 @@
 import { Loader2Icon } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { createElement } from 'react';
-import { Toaster as Sonner, type ToasterProps } from 'sonner';
+import { Toaster, type ToasterProps } from 'sonner';
 import { EmphasisDecoration } from '@/decorations/ui/emphasis-decoration';
 import EmphasisVariant from '@/wayfinder/App/Enums/Frontend/EmphasisVariant';
 
-const Toaster = ({ ...props }: ToasterProps) => {
+const Transient = ({ ...props }: ToasterProps) => {
   const { theme = "system" } = useTheme()
 
   return (
-    <Sonner
+    <Toaster
       theme={theme as ToasterProps["theme"]}
       richColors
       className="toaster group"
@@ -45,4 +45,4 @@ const Toaster = ({ ...props }: ToasterProps) => {
   )
 }
 
-export { Toaster }
+export { Transient }
