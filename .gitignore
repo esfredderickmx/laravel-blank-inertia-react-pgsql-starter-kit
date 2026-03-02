@@ -21,7 +21,9 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 boost.json
+opencode.json
 CLAUDE.md
+AGENTS.md
 /auth.json
 /.fleet
 /.idea
@@ -29,6 +31,7 @@ CLAUDE.md
 /.vscode
 /.zed
 /.claude
+/.agents
 
 # Project exclude paths
 /storage/app/
