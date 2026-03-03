@@ -21,12 +21,12 @@ An opinionated Laravel starter kit built on **PostgreSQL schemas**, **Inertia v2
 
 Create your app using composer:
 ```bash
-composer create-project esfredderick/react-pgsql-starter-kit example-app
+composer create-project esfredderick/laravel-blank-inertia-react-pgsql-starter-kit example-app
 ```
 
 Or use the [Laravel installer](https://laravel.com/docs/12.x/starter-kits#community-maintained-starter-kits):
 ```bash
-laravel new my-app --using=esfredderick/react-pgsql-starter-kit
+laravel new my-app --using=esfredderick/laravel-blank-inertia-react-pgsql-starter-kit
 ```
 
 ### Initial setup

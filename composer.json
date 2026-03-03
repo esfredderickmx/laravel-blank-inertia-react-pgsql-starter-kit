@@ -1,11 +1,16 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "esfredderick/react-pgsql-starter-kit",
+    "name": "esfredderick/laravel-blank-inertia-react-pgsql-starter-kit",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
         "laravel",
-        "starter-kit"
+        "starter-kit",
+        "react",
+        "pgsql",
+        "postgres",
+        "inertia",
+        "vite"
     ],
     "license": "MIT",
     "require": {
